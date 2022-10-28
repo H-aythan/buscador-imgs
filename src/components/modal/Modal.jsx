@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import iconPerson from '../../assets/icons/iconPerson.jpg'
 import TextArea from './modalComponents/TextArea'
-const modal = ({modalAccion}) => {
+const Modal = ({modalAccion}) => {
   const [name,setName]=useState("hola")
   const [coments,setComents]=useState([{name:"juan",coment:"si esta bueno"},{name:"pedro",coment:"si me gusta"}])
   const addComent=(coment)=>{
@@ -61,4 +61,4 @@ const modal = ({modalAccion}) => {
   )
 }
 
-export default modal
+export default Modal

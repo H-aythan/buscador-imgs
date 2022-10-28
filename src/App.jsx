@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Dashboard from './components/Dashboard'
 import Head from './components/Header'
-import Modal from './components/modal/modal'
 //import './App.css'
 
 function App() {
