@@ -41,8 +41,8 @@ const modal = ({modalAccion}) => {
               </div>
             </div>
             <ul className='w-3/5'>
-              {coments.map((item)=>{
-                return <li className='py-2 border-b flex'>
+              {coments.map((item,i)=>{
+                return <li key={i} className='py-2 border-b flex'>
                     <img className='w-8 h-8 rounded-full' src={iconPerson}/>
                     <div className='ml-2 overflow-x-hidden'>
                       <span className='text-blue-700'>{item.name}</span>
