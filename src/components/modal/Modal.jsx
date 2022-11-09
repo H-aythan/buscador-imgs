@@ -1,22 +1,32 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import iconPerson from '../../assets/icons/iconPerson.jpg'
+import cerrar from '../../assets/icons/cerrar.png'
+import { StoreContext } from '../storeProvider/StoreProvider'
 import TextArea from './modalComponents/TextArea'
 const Modal = ({modalAccion}) => {
   const [name,setName]=useState("hola")
   const [coments,setComents]=useState([{name:"juan",coment:"si esta bueno"},{name:"pedro",coment:"si me gusta"}])
+  const [user,setUser]=useContext(StoreContext);
+  const [alert,setAlert]=useState(false)
   const addComent=(coment)=>{
-    setComents([...coments,coment])
-  }
+    user
+      ?setComents([...coments,coment])
+      :setAlert(true)
+  } 
+  
   return (
     <div style={{zIndex:"100"}} 
-    onClick={()=>modalAccion()}
+    onClick={()=>modalAccion("close")}
     className='fixed top-0 left-0 w-screen bg-black h-screen flex justify-center
       bg-opacity-50 overflow-y-scroll py-10 
     '>
-        <div className='md:w-4/5 bg-white py-10 rounded-lg px-2 md:px-10 h-max flex flex-col'
+        <div className='md:w-4/5 bg-white py-10 rounded-lg px-2 md:px-10 h-max flex flex-col relative'
           onClick={(e)=>e.stopPropagation()}
           >
+          <button className='w-5 absolute right-0 top-0 m-4' onClick={()=>modalAccion("close")}>
+            <img src={cerrar}/>
+          </button>
           <div className='flex mb-5 border-2 flex-col xl:flex-row items-center xl:items-start'>
             <img className='md:w-4/5 mb-4' src='https://preview.redd.it/7kvs11y094m01.jpg?auto=webp&s=f266525cf923b8f6158a7e3a1a9bfaa8dec13e90'/>
             <div className='border shadow-xl rounded-lg w-4/5 xl:w-1/5 xl:ml-10 h-min px-4 py-2 '>
@@ -35,16 +45,17 @@ const Modal = ({modalAccion}) => {
 
             <div className='lg:w-1/3 h-min flex  flex-wrap lg:order-2 '>
               <span className='w-full mb-4 text-xl'>Compartenos tus ideas</span>
-              <div className='w-full flex '>
-                <img className="w-8 h-8 mr-3 rounded-full" src={iconPerson}/>
-                <TextArea addComent={addComent}/>
+              <div className='w-full flex flex-wrap'>
+                {alert&&<span className='w-full text-xs my-2 bg-red-500 p-1 text-white'>Inicia sesion para poder comentar!</span>}
+                
+                <TextArea addComent={addComent} user={user}/>
               </div>
             </div>
-            <ul className='w-3/5'>
+            <ul className='lg:w-3/5'>
               {coments.map((item,i)=>{
-                return <li key={i} className='py-2 border-b flex'>
+                return <li key={i} className='py-2 border-b flex '>
                     <img className='w-8 h-8 rounded-full' src={iconPerson}/>
-                    <div className='ml-2 overflow-x-hidden'>
+                    <div className='ml-2 overflow-x-hidden '>
                       <span className='text-blue-700'>{item.name}</span>
                       <p className='text-sm break-all'>
                         {item.coment}

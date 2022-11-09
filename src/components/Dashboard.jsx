@@ -14,13 +14,14 @@ const Dashboard = () => {
             setModal(false)
         }
     }
+    //  
     return (
       <>
         {modal&&ReactDOM.createPortal(<Modal modalAccion={modalAaccion} />,document.querySelector("#portal"))}
         <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-5' >
         {[0,1,2,3,4,5,6,7,8,9,10,11].map((item,i)=>{
-            return <div className='relative flex flex-col overflow-hidden cursor-pointer' key={i}  onMouseOver={()=>setId(item)} onMouseOut={()=>setId(false)}>
-                <img src={'https://images.alphacoders.com/100/1003664.png'} onClick={()=>modalAaccion("open")}/>
+            return <div className='relative flex flex-col overflow-hidden cursor-pointer bg-white' key={i}  onMouseOver={()=>setId(item)} onMouseOut={()=>setId(false)}>
+                <img loading='lazy' src={'https://images.alphacoders.com/100/1003664.png'} onClick={()=>modalAaccion("open")}/>
                     <span className={`bg-slate-800 absolute -bottom-4 min-w-full opacity-20 text-white bg-opacity-70 flex px-1 
                         ${id===i?"visible opacity-100 -translate-y-4 transition ease-in-out duration-500":"invisible"}
                         `}>
