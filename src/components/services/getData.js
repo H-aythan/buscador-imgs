@@ -5,7 +5,7 @@ const getData=async(searching,setImgcollection,page,refDash)=>{
     
     const response=await fetch(URL);
     const data=await response.json()
-    
+    console.log(data)
     setImgcollection(searching?data.results:data)
     searching&&refDash.current.scrollIntoView({block: "start", behavior: "smooth"})
   }

@@ -46,7 +46,7 @@ const Dashboard = ({imgCollection,refDashBoard}) => {
                     </span>
                 </div>
                 })}
-                
+                {imgCollection.length===0&&<span className='text-white text-3xl col-span-5 text-center'>No se encontraron resultados</span>}
         </div>
         
     </>
